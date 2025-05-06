@@ -24,9 +24,15 @@ The /build Starter Newsletter Template provides a professional foundation for cr
 ## What's Included
 
 ### Core Files
-- `newsletter.html` - The main HTML template with inline CSS
-- `newsletter.md` - Markdown version for easy editing
-- `preview.html` - Local preview version
+- `template-1.html` - Basic newsletter template with essential sections
+- `template-2.html` - Enhanced template with additional styling options
+- `template-3.html` - Advanced template with premium features
+
+Each template includes:
+- Clean, semantic HTML with inline CSS
+- Pre-formatted content sections
+- Responsive design for all devices
+- Email client compatibility
 
 ### Content Sections
 1. **Header** - Newsletter title and issue number
@@ -38,29 +44,29 @@ The /build Starter Newsletter Template provides a professional foundation for cr
 
 ### Folder Structure
 ```
-starter-newsletter/
-├── newsletter.html
-├── newsletter.md
-├── preview.html
-└── assets/
-    └── images/
+CraftTheFutureNewsletterService/
+├── template-1.html
+├── template-2.html
+├── template-3.html
+└── README.md
 ```
 
 ## Quick Start Guide
 
-### 1. Customizing Content
+### 1. Choosing a Template
 
-#### HTML Version
-1. Open `newsletter.html` in your preferred text editor
+Select the template that best fits your needs:
+- `template-1.html`: Perfect for beginners, includes essential sections
+- `template-2.html`: Enhanced version with additional styling options
+- `template-3.html`: Advanced template with premium features
+
+### 2. Customizing Content
+
+1. Open your chosen template in your preferred text editor
 2. Edit the content within each section
-3. Preview using `preview.html`
+3. Preview in your browser to see changes
 
-#### Markdown Version
-1. Open `newsletter.md` in your text editor
-2. Edit the content using Markdown syntax
-3. Convert to HTML using your preferred Markdown processor
-
-### 2. Local Preview
+### 3. Local Preview
 
 #### Option 1: HTML Preview
 1. Open `preview.html` in your browser
@@ -71,7 +77,7 @@ starter-newsletter/
 - Use VS Code with Markdown Preview extension
 - Or use online Markdown editors like StackEdit
 
-### 3. Sending Your Newsletter
+### 4. Sending Your Newsletter
 
 The template is compatible with various email platforms:
 - Substack
