@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>/build Newsletter</title>
+    <style>
+        :root {
+            --bg-color: #fafafa;
+            --text-color: #2d3436;
+            --accent-color: #6c5ce7;
+            --secondary-bg: #ffffff;
+            --border-color: #dfe6e9;
+            --code-bg: #f1f2f6;
+            --muted-text: #636e72;
+            --gradient-start: #6c5ce7;
+            --gradient-end: #a29bfe;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #2d3436;
+            --text-color: #f5f6fa;
+            --accent-color: #a29bfe;
+            --secondary-bg: #353b48;
+            --border-color: #576574;
+            --code-bg: #2f3640;
+            --muted-text: #b2bec3;
+            --gradient-start: #a29bfe;
+            --gradient-end: #6c5ce7;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: left;
+            margin-bottom: 60px;
+            padding-bottom: 40px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .logo {
+            font-size: 3.5em;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 0;
+            letter-spacing: -0.03em;
+        }
+
+        .section {
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 1.4em;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: var(--accent-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tool-item, .signal-item {
+            margin-bottom: 35px;
+            padding: 25px;
+            background-color: var(--secondary-bg);
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease;
+        }
+
+        .tool-item:hover, .signal-item:hover {
+            transform: translateY(-2px);
+        }
+
+        .code-block {
+            background-color: var(--code-bg);
+            padding: 25px;
+            border-radius: 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9em;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 2px solid var(--border-color);
+        }
+
+        .social-links {
+            margin: 30px 0;
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+        }
+
+        .social-links a {
+            color: var(--muted-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: white;
+            padding: 16px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            margin: 20px 0;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(108, 92, 231, 0.2);
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: var(--secondary-bg);
+            color: var(--text-color);
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+        }
+
+        h3 {
+            font-size: 1.3em;
+            font-weight: 600;
+            margin: 0 0 15px 0;
+            color: var(--text-color);
+        }
+
+        p {
+            margin: 0 0 20px 0;
+            color: var(--muted-text);
+            font-size: 1.1em;
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        a:hover {
+            color: var(--gradient-end);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            .header {
+                margin-bottom: 40px;
+            }
+            
+            .logo {
+                font-size: 2.5em;
+            }
+            
+            .tool-item, .signal-item {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
+    
+    <div class="container">
+        <div class="header">
+            <div class="logo">/build</div>
+            <p>Weekly insights for builders and creators</p>
+        </div>
+
+        <!-- Personal Hook / Devlog Thought -->
+        <div class="section">
+            <div class="section-title">🚀 This Week's Build</div>
+            <p>Your personal hook or devlog thought goes here. Keep it concise and engaging, sharing what you've learned or what's on your mind.</p>
+        </div>
+
+        <!-- Builder Log -->
+        <div class="section">
+            <div class="section-title">📝 Builder Log</div>
+            <div class="tool-item">
+                <h3>What I Shipped</h3>
+                <p>List your recent achievements and shipped features here.</p>
+            </div>
+            
+            <div class="tool-item">
+                <h3>What I Broke</h3>
+                <p>Share your challenges and lessons learned.</p>
+            </div>
+            
+            <div class="tool-item">
+                <h3>What's Next</h3>
+                <p>Outline your upcoming plans and goals.</p>
+            </div>
+        </div>
+
+        <!-- Tool Stack -->
+        <div class="section">
+            <div class="section-title">🛠️ Tool Stack of the Week</div>
+            <div class="tool-item">
+                <h3>Tool Name</h3>
+                <p>Brief description and why it's worth checking out.</p>
+            </div>
+            <div class="tool-item">
+                <h3>Tool Name</h3>
+                <p>Brief description and why it's worth checking out.</p>
+            </div>
+        </div>
+
+        <!-- Signal Feed -->
+        <div class="section">
+            <div class="section-title">📡 Signal Feed</div>
+            <div class="signal-item">
+                <h3>Signal Title</h3>
+                <p>Quick context and why it matters.</p>
+                <a href="#">Read more →</a>
+            </div>
+            <div class="signal-item">
+                <h3>Signal Title</h3>
+                <p>Quick context and why it matters.</p>
+                <a href="#">Read more →</a>
+            </div>
+        </div>
+
+        <!-- From the Terminal -->
+        <div class="section">
+            <div class="section-title">💻 From the Terminal</div>
+            <div class="code-block">
+                <pre><code># Your command or code snippet here
+git commit -m "feat: add new feature"</code></pre>
+            </div>
+            <p>Quick explanation of the command or tip.</p>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="social-links">
+                <a href="#">Twitter</a>
+                <a href="#">GitHub</a>
+                <a href="#">LinkedIn</a>
+            </div>
+            <a href="#" class="cta-button">Subscribe to /build</a>
+            <p>Built with ❤️ by Craft The Future</p>
+        </div>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            body.setAttribute('data-theme', newTheme);
+        }
+    </script>
+</body>
+</html>

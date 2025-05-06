@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>/build Newsletter</title>
+    <style>
+        :root {
+            --bg-color: #0a0a0a;
+            --text-color: #ffffff;
+            --accent-color: #00ff9d;
+            --secondary-bg: #1a1a1a;
+            --border-color: #333333;
+            --code-bg: #1a1a1a;
+            --highlight: #ff3366;
+            --gradient-start: #00ff9d;
+            --gradient-end: #00b8ff;
+        }
+
+        [data-theme="light"] {
+            --bg-color: #f5f5f5;
+            --text-color: #0a0a0a;
+            --accent-color: #00cc7e;
+            --secondary-bg: #ffffff;
+            --border-color: #e0e0e0;
+            --code-bg: #f8f8f8;
+            --highlight: #ff3366;
+            --gradient-start: #00cc7e;
+            --gradient-end: #0099ff;
+        }
+
+        body {
+            font-family: 'Space Grotesk', 'SF Pro Display', -apple-system, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0;
+            position: relative;
+        }
+
+        .header {
+            padding: 60px 40px;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .logo {
+            font-size: 4em;
+            font-weight: 700;
+            color: var(--text-color);
+            margin: 0;
+            line-height: 1;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+        }
+
+        .section {
+            margin: 0 40px 40px;
+            padding: 40px;
+            background-color: var(--secondary-bg);
+            border-left: 4px solid var(--accent-color);
+            position: relative;
+        }
+
+        .section:nth-child(even) {
+            border-left: none;
+            border-right: 4px solid var(--highlight);
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: var(--accent-color);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section:nth-child(even) .section-title {
+            color: var(--highlight);
+        }
+
+        .tool-item, .signal-item {
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .tool-item:last-child, .signal-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .code-block {
+            background-color: var(--code-bg);
+            padding: 25px;
+            border-radius: 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9em;
+            overflow-x: auto;
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .code-block::before {
+            content: '>';
+            position: absolute;
+            left: 10px;
+            top: 10px;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 40px;
+            background-color: var(--secondary-bg);
+            border-top: 4px solid var(--accent-color);
+        }
+
+        .social-links {
+            margin: 30px 0;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .social-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1em;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            padding: 20px 40px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.2em;
+            margin: 30px 0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 255, 157, 0.2);
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            padding: 12px 24px;
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            border: none;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: transform 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: translateY(-2px);
+        }
+
+        h3 {
+            font-size: 1.4em;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--text-color);
+        }
+
+        p {
+            margin: 0 0 20px 0;
+            color: var(--text-color);
+            opacity: 0.9;
+            font-size: 1.1em;
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--highlight);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+            
+            .section {
+                margin: 0 0 30px;
+                padding: 30px;
+            }
+            
+            .header {
+                padding: 40px 20px;
+            }
+            
+            .logo {
+                font-size: 3em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
+    
+    <div class="container">
+        <div class="header">
+            <div class="logo">/build</div>
+            <p>Weekly insights for builders and creators</p>
+        </div>
+
+        <!-- Personal Hook / Devlog Thought -->
+        <div class="section">
+            <div class="section-title">🚀 This Week's Build</div>
+            <p>Your personal hook or devlog thought goes here. Keep it concise and engaging, sharing what you've learned or what's on your mind.</p>
+        </div>
+
+        <!-- Builder Log -->
+        <div class="section">
+            <div class="section-title">📝 Builder Log</div>
+            <h3>What I Shipped</h3>
+            <p>List your recent achievements and shipped features here.</p>
+            
+            <h3>What I Broke</h3>
+            <p>Share your challenges and lessons learned.</p>
+            
+            <h3>What's Next</h3>
+            <p>Outline your upcoming plans and goals.</p>
+        </div>
+
+        <!-- Tool Stack -->
+        <div class="section">
+            <div class="section-title">🛠️ Tool Stack of the Week</div>
+            <div class="tool-item">
+                <h3>Tool Name</h3>
+                <p>Brief description and why it's worth checking out.</p>
+            </div>
+            <div class="tool-item">
+                <h3>Tool Name</h3>
+                <p>Brief description and why it's worth checking out.</p>
+            </div>
+        </div>
+
+        <!-- Signal Feed -->
+        <div class="section">
+            <div class="section-title">📡 Signal Feed</div>
+            <div class="signal-item">
+                <h3>Signal Title</h3>
+                <p>Quick context and why it matters.</p>
+                <a href="#">Read more →</a>
+            </div>
+            <div class="signal-item">
+                <h3>Signal Title</h3>
+                <p>Quick context and why it matters.</p>
+                <a href="#">Read more →</a>
+            </div>
+        </div>
+
+        <!-- From the Terminal -->
+        <div class="section">
+            <div class="section-title">💻 From the Terminal</div>
+            <div class="code-block">
+                <pre><code># Your command or code snippet here
+git commit -m "feat: add new feature"</code></pre>
+            </div>
+            <p>Quick explanation of the command or tip.</p>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="social-links">
+                <a href="#">Twitter</a>
+                <a href="#">GitHub</a>
+                <a href="#">LinkedIn</a>
+            </div>
+            <a href="#" class="cta-button">Subscribe to /build</a>
+            <p>Built with ❤️ by Craft The Future</p>
+        </div>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            body.setAttribute('data-theme', newTheme);
+        }
+    </script>
+</body>
+</html>

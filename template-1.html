@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>/build Newsletter</title>
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #1a1a1a;
+            --accent-color: #2563eb;
+            --secondary-bg: #f3f4f6;
+            --border-color: #e5e7eb;
+            --code-bg: #f8fafc;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #111827;
+            --text-color: #f3f4f6;
+            --accent-color: #60a5fa;
+            --secondary-bg: #1f2937;
+            --border-color: #374151;
+            --code-bg: #1e293b;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .logo {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: var(--secondary-bg);
+            border-radius: 8px;
+        }
+
+        .section-title {
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--accent-color);
+        }
+
+        .tool-item, .signal-item {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .tool-item:last-child, .signal-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .code-block {
+            background-color: var(--code-bg);
+            padding: 15px;
+            border-radius: 6px;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .social-links {
+            margin: 20px 0;
+        }
+
+        .social-links a {
+            color: var(--accent-color);
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            margin: 20px 0;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 8px 16px;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
+    
+    <div class="container">
+        <div class="header">
+            <div class="logo">/build</div>
+            <p>Weekly insights for builders and creators</p>
+        </div>
+
+        <!-- Personal Hook / Devlog Thought -->
+        <div class="section">
+            <div class="section-title">🚀 This Week's Build</div>
+            <p>Your personal hook or devlog thought goes here. Keep it concise and engaging, sharing what you've learned or what's on your mind.</p>
+        </div>
+
+        <!-- Builder Log -->
+        <div class="section">
+            <div class="section-title">📝 Builder Log</div>
+            <h3>What I Shipped</h3>
+            <p>List your recent achievements and shipped features here.</p>
+            
+            <h3>What I Broke</h3>
+            <p>Share your challenges and lessons learned.</p>
+            
+            <h3>What's Next</h3>
+            <p>Outline your upcoming plans and goals.</p>
+        </div>
+
+        <!-- Tool Stack -->
+        <div class="section">
+            <div class="section-title">🛠️ Tool Stack of the Week</div>
+            <div class="tool-item">
+                <h3>Tool Name</h3>
+                <p>Brief description and why it's worth checking out.</p>
+            </div>
+            <div class="tool-item">
+                <h3>Tool Name</h3>
+                <p>Brief description and why it's worth checking out.</p>
+            </div>
+        </div>
+
+        <!-- Signal Feed -->
+        <div class="section">
+            <div class="section-title">📡 Signal Feed</div>
+            <div class="signal-item">
+                <h3>Signal Title</h3>
+                <p>Quick context and why it matters.</p>
+                <a href="#">Read more →</a>
+            </div>
+            <div class="signal-item">
+                <h3>Signal Title</h3>
+                <p>Quick context and why it matters.</p>
+                <a href="#">Read more →</a>
+            </div>
+        </div>
+
+        <!-- From the Terminal -->
+        <div class="section">
+            <div class="section-title">💻 From the Terminal</div>
+            <div class="code-block">
+                <pre><code># Your command or code snippet here
+git commit -m "feat: add new feature"</code></pre>
+            </div>
+            <p>Quick explanation of the command or tip.</p>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="social-links">
+                <a href="#">Twitter</a>
+                <a href="#">GitHub</a>
+                <a href="#">LinkedIn</a>
+            </div>
+            <a href="#" class="cta-button">Subscribe to /build</a>
+            <p>Built with ❤️ by Craft The Future</p>
+        </div>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            body.setAttribute('data-theme', newTheme);
+        }
+    </script>
+</body>
+</html>
